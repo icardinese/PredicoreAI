@@ -15,7 +15,7 @@ cd (path)
 ```
 For example my path is:
 ```
-cd C:\Users\Owner\OneDrive\CODE\AntiRacialBias
+cd C:\Users\Owner\OneDrive\CODE\PredicoreAI
 ```
   2. In the powershell type the following command:
 ```

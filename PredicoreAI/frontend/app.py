@@ -192,6 +192,10 @@ def extract_data_from_pdf(file_path):
 def inject_now():
     return {'current_year': datetime.utcnow().year}
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')

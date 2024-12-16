@@ -1,14 +1,45 @@
-<!-- scan_pdf.html -->
-{% extends "base.html" %}
-{% block content %}
-<div class="container mt-5">
-    <h2>Upload PDF for Data Extraction</h2>
-    <form action="{{ url_for('scan_pdf') }}" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="pdf_file">Select PDF File:</label>
-            <input type="file" class="form-control-file" name="pdf_file" accept="application/pdf" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload and Extract Data</button>
-    </form>
-</div>
-{% endblock %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Scan PDF - PrediCore AI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+</head>
+<body>
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1 id="logo"><a href="{{ url_for('index') }}">PrediCore AI</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('analysis') }}">Analysis</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <article id="main">
+            <section class="wrapper style1 container special">
+                <h2>Upload PDF for Data Extraction</h2>
+                <form action="{{ url_for('scan_pdf') }}" method="post" enctype="multipart/form-data">
+                    <label>Select PDF File:</label>
+                    <input type="file" name="pdf_file" accept="application/pdf" required>
+                    <button type="submit" class="button primary">Upload and Extract</button>
+                </form>
+            </section>
+        </article>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; PrediCore AI</li>
+                <li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
+    </div>
+</body>
+</html>

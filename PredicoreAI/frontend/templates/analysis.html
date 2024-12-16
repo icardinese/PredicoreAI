@@ -1,21 +1,78 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="analysis-container fade-in">
-    <h2>Data Analysis</h2>
-    <div id="charts">
-        <!-- Graph Containers -->
-        <div id="overall-metrics"></div>
-        <div id="group-accuracies"></div>
-        <div id="mae-dates"></div>
-        <div id="fpr-group"></div>
-        <div id="fnr-group"></div>
-        <div id="severity-accuracy"></div>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Data Analysis - PrediCore AI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+</head>
+<body>
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1 id="logo"><a href="{{ url_for('index') }}">PrediCore AI</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="{{ url_for('input_form') }}" class="button primary">Get Started</a></li>
+						<li class="nav-item {% if request.endpoint == 'index' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'input_form' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('input_form') }}">Predict</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'scan_pdf' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('scan_pdf') }}">Scan PDF</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'analysis' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('analysis') }}">Data Analysis</a>
+						</li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Banner -->
+        <section id="banner">
+            <div class="inner">
+                <header>
+                    <h2>Data Analysis</h2>
+                </header>
+                <p>Explore insights from your predictions.</p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <article id="main">
+            <section class="wrapper style1 container special">
+                <div class="analysis-container">
+                    <h3>Performance Metrics</h3>
+                    <div id="charts">
+                        <div id="overall-metrics"></div>
+                        <div id="group-accuracies"></div>
+                        <div id="mae-dates"></div>
+                        <div id="fpr-group"></div>
+                        <div id="fnr-group"></div>
+                        <div id="severity-accuracy"></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; PrediCore AI</li>
+                <li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
     </div>
-</div>
 
-<!-- Include Plotly.js -->
+    <!-- Scripts -->
+
+    <!-- Include Plotly.js -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+{% block content %}
 <script>
     // Ensure all code is wrapped in a window.onload function
     window.onload = function() {
@@ -263,3 +320,6 @@
     }; // End of window.onload function
 </script>
 {% endblock %}
+
+</body>
+</html>

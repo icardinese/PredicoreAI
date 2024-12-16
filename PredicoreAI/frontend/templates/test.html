@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>PrediCore AI - Shaping Justice</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="index is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header" class="alt">
+				<h1 id="logo"><a href="{{ url_for('index') }}">PrediCore AI <span>Shaping Justice</span></a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="{{ url_for('input_form') }}" class="button primary">Get Started</a></li>
+						<li class="nav-item {% if request.endpoint == 'index' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'input_form' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('input_form') }}">Predict</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'scan_pdf' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('scan_pdf') }}">Scan PDF</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'analysis' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('analysis') }}">Data Analysis</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<header>
+						<h2>PrediCore AI</h2>
+					</header>
+					<p>Harness AI to assess recidivism risks<br />and empower decision-making.</p>
+					<footer>
+						<ul class="buttons stacked">
+							<li><a href="{{ url_for('input_form') }}" class="button fit scrolly">Start Predicting</a></li>
+						</ul>
+					</footer>
+				</div>
+			</section>
+
+			<!-- Main Content -->
+			<article id="main">
+
+				<header class="special container">
+					<h2>Why Choose <strong>PrediCore AI</strong>?</h2>
+					<p>Our mission is to leverage AI to create a fairer judicial system. By predicting recidivism risks with precision and transparency, we aim to assist professionals in making more informed, unbiased decisions. Together, we can reduce systemic inequality and foster safer communities.</p>
+				</header>
+
+				<!-- Features Section -->
+				<section class="wrapper style1 container special">
+					<div class="row">
+						<div class="col-4 col-12-narrower">
+							<section>
+								<span class="icon solid featured fa-chart-line"></span>
+								<header>
+									<h3>High Accuracy</h3>
+								</header>
+								<p>Our models deliver precision, ensuring reliable predictions for recidivism and violent behavior.</p>
+							</section>
+						</div>
+						<div class="col-4 col-12-narrower">
+							<section>
+								<span class="icon solid featured fa-shield-alt"></span>
+								<header>
+									<h3>Ethical & Transparent</h3>
+								</header>
+								<p>Designed to minimize bias, our system is built with fairness and transparency in mind.</p>
+							</section>
+						</div>
+						<div class="col-4 col-12-narrower">
+							<section>
+								<span class="icon solid featured fa-brain"></span>
+								<header>
+									<h3>AI-Powered Insights</h3>
+								</header>
+								<p>Leverage the latest advancements in AI to uncover insights that drive impactful decisions.</p>
+							</section>
+						</div>
+					</div>
+				</section>
+
+				<!-- Call-to-Action Section -->
+				<section class="wrapper style2 container special-alt">
+					<div class="row gtr-50">
+						<div class="col-8 col-12-narrower">
+							<header>
+								<h2>Ready to make a difference?</h2>
+							</header>
+							<p>Empower decisions, reduce bias, and reshape justice with PrediCore AI. Join us in creating a more equitable future.</p>
+							<footer>
+								<ul class="buttons">
+									<li><a href="{{ url_for('input_form') }}" class="button">Learn More</a></li>
+								</ul>
+							</footer>
+						</div>
+						<div class="col-4 col-12-narrower">
+							<img src="{{ url_for('static', filename='images/justice-bg.jpg') }}" class="image fit" alt="Justice Image">
+						</div>
+					</div>
+				</section>
+
+			</article>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; PrediCore AI</li><li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	</body>
+</html>

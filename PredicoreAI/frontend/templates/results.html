@@ -1,43 +1,158 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Prediction Results</h2>
-    <div class="row">
-        <!-- Recidivism Prediction Card -->
-        <div class="col-md-6">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">Recidivism Prediction</div>
-                <div class="card-body">
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Results - PrediCore AI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <style>
+        /* Results Page Styling */
+        .results-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .results-header {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #444;
+        }
+    
+        .result-card {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #555;
+        }
+    
+        .result-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+        .result-card p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+    
+        .highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+    
+        .btn-download {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #28a745;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn-download:hover {
+            background-color: #218838;
+        }
+    
+        .results-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1 id="logo"><a href="{{ url_for('index') }}">PrediCore AI</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="{{ url_for('input_form') }}" class="button primary">Get Started</a></li>
+						<li class="nav-item {% if request.endpoint == 'index' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'input_form' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('input_form') }}">Predict</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'scan_pdf' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('scan_pdf') }}">Scan PDF</a>
+						</li>
+						<li class="nav-item {% if request.endpoint == 'analysis' %}active{% endif %}">
+							<a class="nav-link" href="{{ url_for('analysis') }}">Data Analysis</a>
+						</li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="results-container">
+            <h2 class="results-header">Prediction Results</h2>
+        
+            <div class="results-wrapper">
+                <!-- Recidivism Prediction Card -->
+                <div class="result-card">
+                    <h3>Recidivism Prediction</h3>
                     <p class="card-text">Probability: <strong>{{ (recidivism_prob[0][0] * 100) | round(2) }}%</strong></p>
-                    <p class="card-text">Risk Level: <span class="badge badge-pill badge-light">{{ recidivism_score }}</span></p>
-                    <p class="card-text">Days until recidivism: <strong>{{ recidivism_date }}</strong></p>
-                    {% if recid_severity_probability %}
-                        <p class="card-text">Probability of the Crime Comitted: <strong>{{ recid_severity_probability * 100 }}%</strong></p>
-                        <p class="card-text">Severity of Crime: <strong>{{ recid_severity_classification }}</strong></p>
-                    {% endif %}
+                                <p class="card-text">Risk Level: <span class="badge badge-pill badge-light">{{ recidivism_score }}</span></p>
+                                <p class="card-text">Days until recidivism: <strong>{{ recidivism_date }}</strong></p>
+                                {% if recid_severity_probability %}
+                                    <p class="card-text">Probability of the Crime Comitted: <strong>{{ recid_severity_probability * 100 }}%</strong></p>
+                                    <p class="card-text">Severity of Crime: <strong>{{ recid_severity_classification }}</strong></p>
+                                {% endif %}
                 </div>
-            </div>
-        </div>
-        <!-- Violent Recidivism Prediction Card -->
-        <div class="col-md-6">
-            <div class="card text-white bg-danger mb-3">
-                <div class="card-header">Violent Recidivism Prediction</div>
-                <div class="card-body">
+        
+                <!-- Violent Recidivism Prediction Card -->
+                <div class="result-card">
+                    <h3>Violent Recidivism Prediction</h3>
                     <p class="card-text">Probability: <strong>{{ (violent_recidivism_prob[0][0] * 100) | round(2) }}%</strong></p>
-                    <p class="card-text">Risk Level: <span class="badge badge-pill badge-light">{{ violent_recidivism_score }}</span></p>
-                    <p class="card-text">Days until violent recidivism: <strong>{{ violence_date }}</strong></p>
-                    {% if violence_severity_probability %}
-                        <p class="card-text">Probability of the Violent Crime Comitted: <strong>{{ violence_severity_probability * 100 }}%</strong></p>
-                        <p class="card-text">Severity of Crime: <strong>{{ violence_severity_classification }}</strong></p>
-                    {% endif %}
+                                <p class="card-text">Risk Level: <span class="badge badge-pill badge-light">{{ violent_recidivism_score }}</span></p>
+                                <p class="card-text">Days until violent recidivism: <strong>{{ violence_date }}</strong></p>
+                                {% if violence_severity_probability %}
+                                    <p class="card-text">Probability of the Violent Crime Comitted: <strong>{{ violence_severity_probability * 100 }}%</strong></p>
+                                    <p class="card-text">Severity of Crime: <strong>{{ violence_severity_classification }}</strong></p>
+                                {% endif %}
                 </div>
             </div>
+        
+            <!-- Download Report Button -->
+            <div class="text-center">
+                <a href="{{ url_for('static', filename='reports/' + pdf_filename) }}" class="btn-download" target="_blank">
+                    Download Report
+                </a>
+            </div>
         </div>
+
         <div class="text-center mt-4">
             <a href="{{ url_for('static', filename='reports/' + pdf_filename) }}" class="btn btn-success" target="_blank">
                 Download Report
             </a>
         </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; PrediCore AI</li>
+                <li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
     </div>
-</div>
-{% endblock %}
+</body>
+</html>
+
